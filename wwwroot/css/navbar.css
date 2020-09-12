@@ -1,0 +1,10 @@
+body {
+  padding-bottom: 20px;
+}
+
+.navbar {
+    /*margin-bottom: 20px;*/
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+}
