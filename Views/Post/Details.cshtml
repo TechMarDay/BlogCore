@@ -4,6 +4,7 @@
     ViewData["Title"] = "Details";
     Layout = null;
 }
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -18,6 +19,8 @@
 
     <!-- Bootstrap core CSS -->
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/lib/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
+    <link href="~/lib/ckeditor/plugins/codesnippet/lib/highlight/styles/ir_black.css" rel="stylesheet" />
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -40,11 +43,12 @@
     <link href="~/css/jumbotron.css" rel="stylesheet" />
     <link href="~/css/blog.css" rel="stylesheet" />
     <link href="~/css/navbar.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/dashboard.css" rel="stylesheet" />
 </head>
 <body>
     <div class="navbar-expand-md navbar-dark fixed-top bg-dark">
         <nav class="navbar">
-            <a class="navbar-brand text-white" href="#">TechMarDay</a>
+            <a class="branch text-white" href="/home">TechMarDay</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -52,16 +56,19 @@
             <div class="collapse navbar-collapse text-white" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="#">.Net core <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Digital Marketing</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#" tabindex="-1">Life</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#" tabindex="-1">Job & interview</a>
+                    </li>
+                    <li class="nav-item dropdown active">
+                        <a class="nav-link dropdown-toggle " href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown01">
                             <a class="dropdown-item" href="#">Action</a>
                             <a class="dropdown-item" href="#">Another action</a>
@@ -70,89 +77,194 @@
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    <input class="form-control mr-sm-2" type="text" placeholder="Find in blog" aria-label="Search">
+                    <button class="btn btn-outline-light my-2 my-sm-0 text-white" type="submit">Search</button>
                 </form>
             </div>
         </nav>
     </div>
     <main role="main">
-        <!-- Main jumbotron for a primary marketing message or call to action -->
-        @*<div class="jumbotron banner text-white">
-                <div class="container">
-                    <h1 class="display-3">Technology, marketing</h1>
-                    <p>We provide the marketing and technology solutions. We will help you win, your success is my success and my success is your success</p>
-                    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
-                </div>
-            </div>*@
 
         <div class="container">
             <div class="row">
                 <div class="col-md-10 blog-main">
-                    <h1>Details</h1>
+                    <script src="~/lib/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
+                    <link href="~/lib/ckeditor/plugins/codesnippet/lib/highlight/styles/ir_black.css" rel="stylesheet" />
+                    <div class="col-lg-12">
+                        <!-- Title -->
+                        <h1 class="mt-4">@Model.Title</h1>
+                        <hr>
+                        <!-- Date/Time -->
+                        <p>Posted on @Model.LastModificationTime.ToString("d/M/yyyy")</p>
 
-                    <div>
-                        <h4>PostModel</h4>
-                        <hr />
-                        <dl class="row">
-                            <dt class="col-sm-2">
-                                @Html.DisplayNameFor(model => model.Title)
-                            </dt>
-                            <dd class="col-sm-10">
-                                @Html.DisplayFor(model => model.Title)
-                            </dd>
-                            <dt class="col-sm-2">
-                                @Html.DisplayNameFor(model => model.Content)
-                            </dt>
-                            <dd class="col-sm-10">
-                                @Html.DisplayFor(model => model.Content)
-                            </dd>
-                            <dt class="col-sm-2">
-                                @Html.DisplayNameFor(model => model.Image)
-                            </dt>
-                            <dd class="col-sm-10">
-                                @Html.DisplayFor(model => model.Image)
-                            </dd>
-                            <dt class="col-sm-2">
-                                @Html.DisplayNameFor(model => model.Category)
-                            </dt>
-                            <dd class="col-sm-10">
-                                @Html.DisplayFor(model => model.Category.Id)
-                            </dd>
-                            <dt class="col-sm-2">
-                                @Html.DisplayNameFor(model => model.LastModificationTime)
-                            </dt>
-                            <dd class="col-sm-10">
-                                @Html.DisplayFor(model => model.LastModificationTime)
-                            </dd>
-                        </dl>
-                    </div>
-                    <div>
-                        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-                        <a asp-action="Index">Back to List</a>
+                        <!-- Preview Image -->
+                        <img class="img-fluid rounded" src="@Model.Image" alt="">
+
+                        <div id="Content" name="Content">
+                            @Html.Raw(Model.Content)
+                        </div>
+                        <!-- /.blog-main -->
                     </div>
 
-                </div><!-- /.blog-main -->
-
+                </div><!-- /.row -->
                 @await Component.InvokeAsync("MenuRight")<!-- /.blog-sidebar -->
-
-            </div><!-- /.row -->
+            </div>
         </div>
     </main><!-- /.container -->
 
-    <footer class="blog-footer">
-        <p>2020</p>
-        <p>
-            <a href="#">Back to top</a>
-        </p>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <footer class="page-footer font-small stylish-color-dark pt-4">
+
+        <!-- Footer Links -->
+        <div class="container text-center text-md-left">
+
+            <!-- Grid row -->
+            <div class="row">
+
+                <!-- Grid column -->
+                <div class="col-md-4 mx-auto">
+
+                    <!-- Content -->
+                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Footer Content</h5>
+                    <p>
+                        Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
+                        consectetur
+                        adipisicing elit.
+                    </p>
+
+                </div>
+                <!-- Grid column -->
+
+                <hr class="clearfix w-100 d-md-none">
+
+                <!-- Grid column -->
+                <div class="col-md-2 mx-auto">
+
+                    <!-- Links -->
+                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Link 1</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 2</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 3</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 4</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+
+                <hr class="clearfix w-100 d-md-none">
+
+                <!-- Grid column -->
+                <div class="col-md-2 mx-auto">
+
+                    <!-- Links -->
+                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Link 1</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 2</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 3</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 4</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+
+                <hr class="clearfix w-100 d-md-none">
+
+                <!-- Grid column -->
+                <div class="col-md-2 mx-auto">
+
+                    <!-- Links -->
+                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Link 1</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 2</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 3</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 4</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row -->
+
+        </div>
+        <!-- Footer Links -->
+
+        <hr>
+
+        <!-- Social buttons -->
+        <ul class="list-unstyled list-inline text-center">
+            <li class="list-inline-item">
+                <a class="btn-floating btn-fb mx-1">
+                    <i class="fa fa-facebook-official"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-tw mx-1">
+                    <i class="fa fa-twitter"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-gplus mx-1">
+                    <i class="fa fa-google-plus-official"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-li mx-1">
+                    <i class="fa fa-linkedin-square"> </i>
+                </a>
+            </li>
+        </ul>
+        <!-- Social buttons -->
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">
+            © 2020 Copyright: Long Nguyen
+            <p>
+                <a href="#">Back to top</a>
+            </p>
+        </div>
+        <!-- Copyright -->
+
     </footer>
     @*@RenderSection("Scripts", required: false)*@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
     <script src="~/lib/ckeditor/ckeditor.js"></script>
     <script src="~/lib/ckeditor/adapters/jquery.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
-    @RenderSection("Scripts", required: false)
     <script>hljs.initHighlightingOnLoad();</script>
+    @*@RenderSection("Scripts", required: false)*@
 </body>
 </html>
+<script>hljs.initHighlightingOnLoad();</script>
