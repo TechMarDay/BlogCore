@@ -20,6 +20,39 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="CategoryType" class="control-label"></label>
+                <select class="form-control" id="CategoryType" name="CategoryType">
+                    @if (Model.CategoryType == CategoryTypeEnum.Type.Common)
+                    {
+                        <option value="2" selected="selected">Common</option>
+                    }
+                    else
+                    {
+                        <option value="2">Common</option>
+
+                    }
+                    @if (Model.CategoryType == CategoryTypeEnum.Type.Marketing)
+                    {
+                        <option value="0" selected="selected">Marketing</option>
+                    }
+                    else
+                    {
+                        <option value="0">Marketing</option>
+
+                    }
+                    @if (Model.CategoryType == CategoryTypeEnum.Type.Programming)
+                    {
+                        <option value="1" selected="selected">Programming</option>
+                    }
+                    else
+                    {
+                        <option value="1">Programming</option>
+
+                    }
+                </select>
+                <span asp-validation-for="CategoryType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>

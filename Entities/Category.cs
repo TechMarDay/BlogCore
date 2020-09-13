@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static BlogCore.Models.CategoryTypeEnum;
 
 namespace BlogCore.Entities
 {
@@ -15,6 +16,8 @@ namespace BlogCore.Entities
         public string Description { get; set; }
 
         public string Image { get; set; }
+
+        public Type CategoryType { get; set; }
 
         public virtual ICollection<Post> Posts { get; set; }
     }

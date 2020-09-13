@@ -45,7 +45,7 @@ namespace BlogCore.Controllers
                                  }
                              };
 
-            var posts = await postsQuery.ToPagedListAsync<PostModel>((int)currentPage, 5);
+            var posts = await postsQuery.ToPagedListAsync<PostModel>((int)currentPage, 6);
             return View(posts);
         }
 

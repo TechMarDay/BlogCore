@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlogCore.ViewComponents
 {
-    public class MenuRightViewComponent: ViewComponent
+    public class MenuRightViewComponent : ViewComponent
     {
         private readonly BlogCoreContext _context;
 
@@ -18,11 +18,21 @@ namespace BlogCore.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            ViewBag.Categories = await _context.Categories.Select(x => new CategoryModel
-            {
-                Id = x.Id,
-                Name = x.Name
-            }).ToListAsync();
+            ViewBag.CategoriesPrograming = await _context.Categories
+                .Where(x => x.CategoryType == CategoryTypeEnum.Type.Programming)
+                .Select(x => new CategoryModel
+                {
+                    Id = x.Id,
+                    Name = x.Name
+                }).ToListAsync();
+
+            ViewBag.CategoriesMarketing = await _context.Categories
+                .Where(x => x.CategoryType == CategoryTypeEnum.Type.Marketing)
+                .Select(x => new CategoryModel
+                {
+                    Id = x.Id,
+                    Name = x.Name
+                }).ToListAsync();
 
             return View();
         }

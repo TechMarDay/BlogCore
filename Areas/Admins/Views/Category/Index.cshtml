@@ -26,6 +26,9 @@
                 @Html.DisplayNameFor(model => model.Items[0].Image)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Items[0].CategoryType)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Items[0].LastModificationTime)
             </th>
             <th></th>
@@ -34,25 +37,28 @@
     <tbody>
         @foreach (var item in Model.Items)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    <img class="img-thumbnail img-thumbnail-custom" width="50" height="50" src="@item.Image" />
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastModificationTime)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                <img class="img-thumbnail img-thumbnail-custom" width="50" height="50" src="@item.Image" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryTypeDisplay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastModificationTime)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

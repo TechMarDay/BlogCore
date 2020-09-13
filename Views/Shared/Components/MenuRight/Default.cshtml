@@ -1,17 +1,18 @@
 ﻿<aside class="col-md-2 blog-sidebar">
     <div class="p-4">
         <h4 class="font-italic">Marketing</h4>
-        <ol class="list-unstyled">
-            <li><a href="#">GitHub</a></li>
-            <li><a href="#">Twitter</a></li>
-            <li><a href="#">Facebook</a></li>
+        <ol class="list-unstyled mb-0">
+            @foreach (var item in ViewBag.CategoriesMarketing)
+            {
+                <li><a href="#">@item.Name</a></li>
+            }
         </ol>
     </div>
 
     <div class="p-4">
         <h4 class="font-italic">Programming</h4>
         <ol class="list-unstyled mb-0">
-            @foreach (var item in ViewBag.Categories)
+            @foreach (var item in ViewBag.CategoriesPrograming)
             {
                 <li><a href="#">@item.Name</a></li>
             }

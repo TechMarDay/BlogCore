@@ -32,6 +32,7 @@ namespace BlogCore.Areas.Admins.Controllers
                 Name = x.Name,
                 Description = x.Description,
                 Image = x.Image,
+                CategoryTypeDisplay = x.CategoryType.ToString(),
                 LastModificationTime = x.LastModificationTime == null ? x.CreationTime : (DateTime)x.LastModificationTime
             });
 
@@ -77,7 +78,7 @@ namespace BlogCore.Areas.Admins.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,Image,LastModificationTime")] CategoryModel categoryModel)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,Image, CategoryType, LastModificationTime")] CategoryModel categoryModel)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +87,8 @@ namespace BlogCore.Areas.Admins.Controllers
                     Name = categoryModel.Name,
                     Description = categoryModel.Description,
                     Image = categoryModel.Image,
-                    CreationTime = DateTime.UtcNow
+                    CreationTime = DateTime.UtcNow,
+                    CategoryType = categoryModel.CategoryType
                 };
 
                 await _context.AddAsync(category);
@@ -110,7 +112,8 @@ namespace BlogCore.Areas.Admins.Controllers
                     Id = x.Id,
                     Description = x.Description,
                     Image = x.Image,
-                    Name = x.Name
+                    Name = x.Name,
+                    CategoryType = x.CategoryType
                 })
                 .FirstOrDefaultAsync();
             if (categoryModel == null)
@@ -125,7 +128,7 @@ namespace BlogCore.Areas.Admins.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Image,LastModificationTime")] CategoryModel categoryModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Image, CategoryType, LastModificationTime")] CategoryModel categoryModel)
         {
             if (id != categoryModel.Id)
             {
@@ -142,6 +145,7 @@ namespace BlogCore.Areas.Admins.Controllers
                     category.Description = categoryModel.Description;
                     category.Image = categoryModel.Image;
                     category.LastModificationTime = DateTime.UtcNow;
+                    category.CategoryType = categoryModel.CategoryType;
 
                     _context.Update(category);
                     await _context.SaveChangesAsync();

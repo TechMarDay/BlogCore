@@ -30,7 +30,7 @@ namespace BlogCore.Extension
                 TotalRecords = totalRecords,
                 CurrentPage = pageIndex,
                 PageSize = pageSize,
-                TotalPages = totalRecords / pageSize + 1
+                TotalPages = totalRecords % pageSize == 0 ? 1 : totalRecords / pageSize + 1
             };
 
             return pagination;
