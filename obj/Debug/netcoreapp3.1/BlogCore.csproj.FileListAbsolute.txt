@@ -190,3 +190,5 @@ C:\BlogCore\BlogCore\obj\Debug\netcoreapp3.1\staticwebassets\BlogCore.StaticWebA
 C:\BlogCore\BlogCore\obj\Debug\netcoreapp3.1\BlogCore.dll
 C:\BlogCore\BlogCore\obj\Debug\netcoreapp3.1\BlogCore.pdb
 C:\BlogCore\BlogCore\obj\Debug\netcoreapp3.1\BlogCore.genruntimeconfig.cache
+C:\BlogCore\BlogCore\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutNoBar.cshtml.g.cs
+C:\BlogCore\BlogCore\obj\Debug\netcoreapp3.1\Razor\Views\Post\PostByCategory.cshtml.g.cs

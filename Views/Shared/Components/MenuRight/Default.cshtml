@@ -4,7 +4,7 @@
         <ol class="list-unstyled mb-0">
             @foreach (var item in ViewBag.CategoriesMarketing)
             {
-                <li><a href="#">@item.Name</a></li>
+                <li><a href="/danh-muc/@item.Id">@item.Name</a></li>
             }
         </ol>
     </div>
@@ -14,7 +14,7 @@
         <ol class="list-unstyled mb-0">
             @foreach (var item in ViewBag.CategoriesPrograming)
             {
-                <li><a href="#">@item.Name</a></li>
+                <li><a href="/danh-muc/@item.Id">@item.Name</a></li>
             }
         </ol>
     </div>

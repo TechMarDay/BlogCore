@@ -45,7 +45,7 @@
                     <h3 class="mb-0">@item.Title</h3>
                     <div class="mb-1 text-muted">Nov 12</div>
                     <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-                    <a href="~/Post/Details/@item.Id" class="stretched-link">Continue reading</a>
+                    <a href="~/bai-viet/@item.Id" class="stretched-link">Continue reading</a>
                 </div>
             </div>
         </div>
@@ -54,7 +54,8 @@
 
 
 </div>
-
+@if (Model.TotalRecords > 0)
+{
 <div class="row">
     <div class="col-sm-12">
         <ul class="pagination">
@@ -67,3 +68,4 @@
         </ul>
     </div>
 </div>
+}
