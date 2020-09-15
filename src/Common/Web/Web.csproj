@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Attributes\**" />
+    <Compile Remove="Controls\**" />
+    <Compile Remove="Expanders\**" />
+    <Compile Remove="Extensions\**" />
+    <Compile Remove="Implementations\**" />
+    <EmbeddedResource Remove="Attributes\**" />
+    <EmbeddedResource Remove="Controls\**" />
+    <EmbeddedResource Remove="Expanders\**" />
+    <EmbeddedResource Remove="Extensions\**" />
+    <EmbeddedResource Remove="Implementations\**" />
+    <None Remove="Attributes\**" />
+    <None Remove="Controls\**" />
+    <None Remove="Expanders\**" />
+    <None Remove="Extensions\**" />
+    <None Remove="Implementations\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\BaseCommandHandler.cs" />
+    <Compile Remove="Controllers\BaseController.cs" />
+    <Compile Remove="Controllers\BaseWebViewController.cs" />
+    <Compile Remove="Filters\GlobalExceptionFilter.cs" />
+    <Compile Remove="Helpers\WebHelper.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FirebaseAdmin" Version="1.15.0" />
+    <PackageReference Include="IdentityModel" Version="4.4.0" />
+    <PackageReference Include="MediatR" Version="4.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
+    <ProjectReference Include="..\DAL\DAL.csproj" />
+  </ItemGroup>
+
+</Project>

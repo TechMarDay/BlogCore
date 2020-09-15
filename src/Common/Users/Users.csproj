@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\**" />
+    <EmbeddedResource Remove="Controllers\**" />
+    <None Remove="Controllers\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Commands\AuthenCommands\ActiveUserPasswordCommandHandler.cs" />
+    <Compile Remove="Commands\AuthenCommands\ChangePasswordCommandHandler.cs" />
+    <Compile Remove="Commands\AuthenCommands\LoginAnotherCommandHandler.cs" />
+    <Compile Remove="Commands\AuthenCommands\LoginCommandHandler.cs" />
+    <Compile Remove="Commands\AuthenCommands\LogoutCommandHandler.cs" />
+    <Compile Remove="Commands\AuthenCommands\RegisterResetPasswordCommandHandler.cs" />
+    <Compile Remove="Commands\AuthenCommands\ResetPasswordCommandHandler.cs" />
+    <Compile Remove="Commands\RoleCommands\AddCommandHandler.cs" />
+    <Compile Remove="Commands\RoleCommands\DeleteCommandHandler.cs" />
+    <Compile Remove="Commands\RoleCommands\UpdateCommandHandler.cs" />
+    <Compile Remove="Commands\RolePermissionCommands\UpdateCommandHandler.cs" />
+    <Compile Remove="Commands\UserCommands\AddCommandHandler.cs" />
+    <Compile Remove="Commands\UserCommands\ChangeRolesCommandHandler.cs" />
+    <Compile Remove="Commands\UserCommands\DeleteCommandHandler.cs" />
+    <Compile Remove="Commands\UserCommands\ResetPasswordByAdminCommandHandler.cs" />
+    <Compile Remove="Commands\UserCommands\UpdateCommandHandler.cs" />
+    <Compile Remove="Commands\UserCommands\UpdatePasswordCommandHandler.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Users.UI\Users.UI.csproj" />
+    <ProjectReference Include="..\Web\Web.csproj" />
+  </ItemGroup>
+
+</Project>
