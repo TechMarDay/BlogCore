@@ -36,6 +36,7 @@ namespace BlogCore.Controllers
                                  Content = p.Content,
                                  CategoryId = p.CategoryId,
                                  Image = p.Image,
+                                 Summary = p.Summary,
                                  LastModificationTime = p.LastModificationTime == null
                                 ? p.CreationTime : (DateTime)p.LastModificationTime,
                                  Category = new CategoryModel

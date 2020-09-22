@@ -1,269 +1,39 @@
 ﻿@model BlogCore.Models.PostModel
 
 @{
+    Layout = "~/Views/Shared/_LayoutNoBar.cshtml";
     ViewData["Title"] = "Details";
-    Layout = null;
 }
 
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Jekyll v4.1.1">
-    <title>Blog Template · Bootstrap</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/blog/">
-
-    <!-- Bootstrap core CSS -->
-    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+<div class="col-md-12 blog-main">
     <script src="~/lib/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
     <link href="~/lib/ckeditor/plugins/codesnippet/lib/highlight/styles/ir_black.css" rel="stylesheet" />
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        @@media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-    </style>
-    <!-- Custom styles for this template -->
-    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="~/css/jumbotron.css" rel="stylesheet" />
-    <link href="~/css/blog.css" rel="stylesheet" />
-    <link href="~/css/navbar.css" rel="stylesheet" />
-    <link href="~/lib/bootstrap/dist/css/dashboard.css" rel="stylesheet" />
-</head>
-<body>
-    <div class="navbar-expand-md navbar-dark fixed-top bg-dark">
-        <nav class="navbar">
-            <a class="branch text-white" href="/home">TechMarDay</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse text-white" id="navbarsExampleDefault">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/danh-muc/10">.Net<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item dropdown active">
-                        <a class="nav-link dropdown-toggle " href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Marketing</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown01">
-                            <a class="dropdown-item" href="/danh-muc/19">ADS</a>
-                            <a class="dropdown-item" href="/danh-muc/20">SEO</a>
-                            <a class="dropdown-item" href="/danh-muc/21">Content</a>
-                            <a class="dropdown-item" href="/danh-muc/22">Event</a>
-                            <a class="dropdown-item" href="/danh-muc/23">Plan Marketing </a>
-                        </div>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/danh-muc/24" tabindex="-1">Life</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/danh-muc/25" tabindex="-1">Job & interview</a>
-                    </li>
-                </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Find in blog" aria-label="Search">
-                    <button class="btn btn-outline-light my-2 my-sm-0 text-white" type="submit">Search</button>
-                </form>
-            </div>
-        </nav>
-    </div>
-    <main role="main">
-
-        <div class="container">
-            <div class="row">
-                <div class="col-md-10 blog-main">
-                    <script src="~/lib/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
-                    <link href="~/lib/ckeditor/plugins/codesnippet/lib/highlight/styles/ir_black.css" rel="stylesheet" />
-                    <div class="col-lg-12">
-                        <!-- Title -->
-                        <h1 class="mt-4">@Model.Title</h1>
-                        <hr>
-                        <!-- Date/Time -->
-                        <p>Posted on @Model.LastModificationTime.ToString("d/M/yyyy")</p>
-
-                        <!-- Preview Image -->
-                        <img class="img-fluid rounded" src="@Model.Image" alt="">
-
-                        <div id="Content" name="Content">
-                            @Html.Raw(Model.Content)
-                        </div>
-                        <!-- /.blog-main -->
-                    </div>
-
-                </div><!-- /.row -->
-                @await Component.InvokeAsync("MenuRight")<!-- /.blog-sidebar -->
-            </div>
-        </div>
-    </main><!-- /.container -->
-
-    <script>hljs.initHighlightingOnLoad();</script>
-
-    <footer class="page-footer font-small stylish-color-dark pt-4">
-
-        <!-- Footer Links -->
-        <div class="container text-center text-md-left">
-
-            <!-- Grid row -->
-            <div class="row">
-
-                <!-- Grid column -->
-                <div class="col-md-4 mx-auto">
-
-                    <!-- Content -->
-                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Footer Content</h5>
-                    <p>
-                        Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
-                        consectetur
-                        adipisicing elit.
-                    </p>
-
-                </div>
-                <!-- Grid column -->
-
-                <hr class="clearfix w-100 d-md-none">
-
-                <!-- Grid column -->
-                <div class="col-md-2 mx-auto">
-
-                    <!-- Links -->
-                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
-
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="#!">Link 1</a>
-                        </li>
-                        <li>
-                            <a href="#!">Link 2</a>
-                        </li>
-                        <li>
-                            <a href="#!">Link 3</a>
-                        </li>
-                        <li>
-                            <a href="#!">Link 4</a>
-                        </li>
-                    </ul>
-
-                </div>
-                <!-- Grid column -->
-
-                <hr class="clearfix w-100 d-md-none">
-
-                <!-- Grid column -->
-                <div class="col-md-2 mx-auto">
-
-                    <!-- Links -->
-                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
-
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="#!">Link 1</a>
-                        </li>
-                        <li>
-                            <a href="#!">Link 2</a>
-                        </li>
-                        <li>
-                            <a href="#!">Link 3</a>
-                        </li>
-                        <li>
-                            <a href="#!">Link 4</a>
-                        </li>
-                    </ul>
-
-                </div>
-                <!-- Grid column -->
-
-                <hr class="clearfix w-100 d-md-none">
-
-                <!-- Grid column -->
-                <div class="col-md-2 mx-auto">
-
-                    <!-- Links -->
-                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
-
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="#!">Link 1</a>
-                        </li>
-                        <li>
-                            <a href="#!">Link 2</a>
-                        </li>
-                        <li>
-                            <a href="#!">Link 3</a>
-                        </li>
-                        <li>
-                            <a href="#!">Link 4</a>
-                        </li>
-                    </ul>
-
-                </div>
-                <!-- Grid column -->
-
-            </div>
-            <!-- Grid row -->
-
-        </div>
-        <!-- Footer Links -->
-
+    <div class="col-lg-12">
+        <!-- Title -->
+        <h1 class="mt-4">@Model.Title</h1>
         <hr>
+        <!-- Date/Time -->
+        <p>Posted on @Model.LastModificationTime.ToString("d/M/yyyy")</p>
 
-        <!-- Social buttons -->
-        <ul class="list-unstyled list-inline text-center">
-            <li class="list-inline-item">
-                <a class="btn-floating btn-fb mx-1">
-                    <i class="fa fa-facebook-official"> </i>
-                </a>
-            </li>
-            <li class="list-inline-item">
-                <a class="btn-floating btn-tw mx-1">
-                    <i class="fa fa-twitter"> </i>
-                </a>
-            </li>
-            <li class="list-inline-item">
-                <a class="btn-floating btn-gplus mx-1">
-                    <i class="fa fa-google-plus-official"> </i>
-                </a>
-            </li>
-            <li class="list-inline-item">
-                <a class="btn-floating btn-li mx-1">
-                    <i class="fa fa-linkedin-square"> </i>
-                </a>
-            </li>
-        </ul>
-        <!-- Social buttons -->
-        <!-- Copyright -->
-        <div class="footer-copyright text-center py-3">
-            © 2020 Copyright: Long Nguyen
-            <p>
-                <a href="#">Back to top</a>
-            </p>
+        <!-- Preview Image -->
+        <img class="img-fluid rounded" src="@Model.Image" alt="">
+
+        <div id="Content" name="Content">
+            @Html.Raw(Model.Content)
         </div>
-        <!-- Copyright -->
+        <!-- /.blog-main -->
+    </div>
 
-    </footer>
-    @*@RenderSection("Scripts", required: false)*@
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
-    <script src="~/lib/ckeditor/ckeditor.js"></script>
-    <script src="~/lib/ckeditor/adapters/jquery.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    @*@RenderSection("Scripts", required: false)*@
-</body>
-</html>
+</div><!-- /.row -->
+@*@RenderSection("Scripts", required: false)*@
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+<script src="~/lib/ckeditor/ckeditor.js"></script>
+<script src="~/lib/ckeditor/adapters/jquery.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+@*@RenderSection("Scripts", required: false)*@
+
 <script>hljs.initHighlightingOnLoad();</script>

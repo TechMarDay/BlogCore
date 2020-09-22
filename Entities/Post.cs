@@ -17,6 +17,8 @@ namespace BlogCore.Entities
 
         public int CategoryId { get; set; }
 
+        public string Summary { get; set; }
+
         public string Image { get; set; }
 
         public virtual Category Category { get; set; }

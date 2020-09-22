@@ -42,6 +42,11 @@
                 <img class="img-thumbnail img-thumbnail-custom" src="@Model.Image" />
             </div>
             <div class="form-group">
+                <label asp-for="Summary" class="control-label"></label>
+                <input asp-for="Summary" class="form-control" />
+                <span asp-validation-for="Summary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="LastModificationTime" class="control-label"></label>
                 <input asp-for="LastModificationTime" class="form-control" />
                 <span asp-validation-for="LastModificationTime" class="text-danger"></span>

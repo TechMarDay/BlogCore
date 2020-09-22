@@ -38,6 +38,7 @@ namespace BlogCore.Areas.Admins.Controllers
                                 Content = p.Content,
                                 CategoryId = p.CategoryId,
                                 Image = p.Image,
+                                Summary = p.Summary,
                                 LastModificationTime = p.LastModificationTime == null 
                                 ? p.CreationTime : (DateTime)p.LastModificationTime,
                                 Category = new CategoryModel
@@ -69,6 +70,7 @@ namespace BlogCore.Areas.Admins.Controllers
                                 Content = p.Content,
                                 CategoryId = p.CategoryId,
                                 Image = p.Image,
+                                Summary = p.Summary,
                                 LastModificationTime = p.LastModificationTime == null
                                ? p.CreationTime : (DateTime)p.LastModificationTime,
                                 Category = new CategoryModel
@@ -106,7 +108,7 @@ namespace BlogCore.Areas.Admins.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Content,CategoryId,Image,LastModificationTime")] PostModel postModel)
+        public async Task<IActionResult> Create([Bind("Id,Title,Content,CategoryId,Summary, Image,LastModificationTime")] PostModel postModel)
         {
             if (ModelState.IsValid)
             {
@@ -116,6 +118,7 @@ namespace BlogCore.Areas.Admins.Controllers
                     Content = postModel.Content,
                     Image = postModel.Image,
                     CategoryId = postModel.CategoryId,
+                    Summary = postModel.Summary,
                     CreationTime = DateTime.UtcNow
                 };
                 _context.Add(post);
@@ -144,6 +147,7 @@ namespace BlogCore.Areas.Admins.Controllers
                                 Content = p.Content,
                                 CategoryId = p.CategoryId,
                                 Image = p.Image,
+                                Summary = p.Summary,
                                 LastModificationTime = p.LastModificationTime == null
                                ? p.CreationTime : (DateTime)p.LastModificationTime,
                                 Category = new CategoryModel
@@ -172,7 +176,7 @@ namespace BlogCore.Areas.Admins.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Content,CategoryId,Image,LastModificationTime")] PostModel postModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Content,CategoryId,Image,Summary, LastModificationTime")] PostModel postModel)
         {
             if (id != postModel.Id)
             {
@@ -189,6 +193,7 @@ namespace BlogCore.Areas.Admins.Controllers
                     post.Title = postModel.Title;
                     post.Content = postModel.Content;
                     post.Image = postModel.Image;
+                    post.Summary = postModel.Summary;
                     post.CategoryId = postModel.CategoryId;
                     post.LastModificationTime = DateTime.UtcNow;
 
@@ -230,6 +235,7 @@ namespace BlogCore.Areas.Admins.Controllers
                                 Title = p.Title,
                                 Content = p.Content,
                                 CategoryId = p.CategoryId,
+                                Summary = p.Summary,
                                 Image = p.Image,
                                 LastModificationTime = p.LastModificationTime == null
                                ? p.CreationTime : (DateTime)p.LastModificationTime,
