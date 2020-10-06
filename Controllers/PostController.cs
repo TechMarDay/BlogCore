@@ -20,10 +20,10 @@ namespace BlogCore.Controllers
         }
 
         // GET: Post/Details/5
-        [HttpGet("bai-viet/{id}")]
-        public async Task<IActionResult> Details(int? id)
+        [HttpGet("{url}")]
+        public async Task<IActionResult> Details(string url)
         {
-            if (id == null)
+            if (string.IsNullOrEmpty(url))
             {
                 return NotFound();
             }
@@ -39,6 +39,7 @@ namespace BlogCore.Controllers
                                 CategoryId = p.CategoryId,
                                 Image = p.Image,
                                 Summary = p.Summary,
+                                Url = p.Url,
                                 LastModificationTime = p.LastModificationTime == null
                                ? p.CreationTime : (DateTime)p.LastModificationTime,
                                 Category = new CategoryModel
@@ -48,14 +49,16 @@ namespace BlogCore.Controllers
                                 }
                             };
 
-            var postModel = await postQuery.Where(x => x.Id == id)
+            var postModel = await postQuery.Where(x => x.Url.Contains(url))
                 .FirstOrDefaultAsync();
+
 
             if (postModel == null)
             {
                 return NotFound();
             }
 
+            ViewBag.Title = postModel.Title;
             return View(postModel);
         }
 
@@ -75,6 +78,7 @@ namespace BlogCore.Controllers
                                  Content = p.Content,
                                  CategoryId = p.CategoryId,
                                  Image = p.Image,
+                                 Url = p.Url,
                                  Summary = p.Summary,
                                  LastModificationTime = p.LastModificationTime == null
                                 ? p.CreationTime : (DateTime)p.LastModificationTime,
@@ -85,8 +89,12 @@ namespace BlogCore.Controllers
                                  }
                              };
 
-            var posts = await postsQuery.Where(x => x.CategoryId == id)
+            var posts = await postsQuery.OrderByDescending(x => x.LastModificationTime).Where(x => x.CategoryId == id)
                 .ToPagedListAsync<PostModel>((int)currentPage, 6);
+
+            ViewBag.Title = posts.Items.FirstOrDefault() == null ?  posts.Items.FirstOrDefault()?.Title 
+                : "Technology - Marketing - Everyday";
+
             return View(posts);
         }
     }

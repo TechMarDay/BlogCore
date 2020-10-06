@@ -9,8 +9,12 @@ namespace BlogCore.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        [Required]
+        [MaxLength(100)]
         public string UserName { get; set; }
 
+        [Required]
+        [MaxLength(200)]
         public string PassWord { get; set; }
 
         public int Role { get; set; }

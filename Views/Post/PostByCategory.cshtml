@@ -2,15 +2,15 @@
 @model BlogCore.Models.Pagination<PostModel>
 @{
     Layout = "~/Views/Shared/_LayoutNoBar.cshtml";
-    ViewData["Title"] = "Home Page";
 }
-<link href="~/css/index.css" rel="stylesheet" />
+@*<link href="~/css/index.css" rel="stylesheet" />*@
+@*<link href="~/css/style.css" rel="stylesheet" />*@
 
-
+<br />
 <div class="row mb-2">
     @foreach (var item in Model.Items)
     {
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="card mb-4 shadow-sm">
                 @if (!string.IsNullOrEmpty(item.Image))
                 {
@@ -23,7 +23,7 @@
                     <h3 class="mb-0">@item.Title</h3>
                     <div class="mb-1 text-muted">Nov 12</div>
                     <p class="card-text mb-auto">@item.Summary</p>
-                    <a href="~/danh-muc/@item.Id" class="stretched-link">Continue reading</a>
+                    <a href="~/@item.Url" class="stretched-link">Continue reading</a>
                 </div>
             </div>
         </div>
@@ -32,18 +32,19 @@
 
 
 </div>
-@if (Model.TotalRecords > 0)
-{
-    <div class="row">
-        <div class="col-sm-12">
-            <ul class="pagination">
-                @for (var i = 1; i <= Model.TotalPages; i++)
-                {
-                    <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
-                        <a asp-route-currentpage="@i" class="page-link">@i</a>
-                    </li>
-                }
-            </ul>
+
+    @if (Model.TotalRecords > 0)
+    {
+        <div class="row">
+            <div class="col-sm-12">
+                <ul class="pagination">
+                    @for (var i = 1; i <= Model.TotalPages; i++)
+                    {
+                        <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                            <a asp-route-currentpage="@i" class="page-link">@i</a>
+                        </li>
+                    }
+                </ul>
+            </div>
         </div>
-    </div>
-}
+    }

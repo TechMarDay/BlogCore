@@ -1,6 +1,7 @@
 ﻿using BlogCore.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace BlogCore.Areas.Admins.Controllers
             _context = context;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index(string userName, string password)
         {
             if (!string.IsNullOrEmpty(userName) && string.IsNullOrEmpty(password))

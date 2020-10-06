@@ -9,6 +9,7 @@ using BlogCore.Data;
 using BlogCore.Models;
 using BlogCore.Extension;
 using BlogCore.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BlogCore.Areas.Admins.Controllers
 {
@@ -23,6 +24,7 @@ namespace BlogCore.Areas.Admins.Controllers
         }
 
         // GET: Admins/Post
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index(int? currentPage)
         {
             if (currentPage == null || currentPage == 0)
@@ -39,6 +41,7 @@ namespace BlogCore.Areas.Admins.Controllers
                                 CategoryId = p.CategoryId,
                                 Image = p.Image,
                                 Summary = p.Summary,
+                                Url = p.Url,
                                 LastModificationTime = p.LastModificationTime == null 
                                 ? p.CreationTime : (DateTime)p.LastModificationTime,
                                 Category = new CategoryModel
@@ -53,6 +56,7 @@ namespace BlogCore.Areas.Admins.Controllers
         }
 
         // GET: Admins/Post/Details/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -70,6 +74,7 @@ namespace BlogCore.Areas.Admins.Controllers
                                 Content = p.Content,
                                 CategoryId = p.CategoryId,
                                 Image = p.Image,
+                                Url = p.Url,
                                 Summary = p.Summary,
                                 LastModificationTime = p.LastModificationTime == null
                                ? p.CreationTime : (DateTime)p.LastModificationTime,
@@ -92,6 +97,7 @@ namespace BlogCore.Areas.Admins.Controllers
         }
 
         // GET: Admins/Post/Create
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create()
         {
             ViewBag.Categories = await _context.Categories.Select(x => new CategoryModel
@@ -108,13 +114,20 @@ namespace BlogCore.Areas.Admins.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Content,CategoryId,Summary, Image,LastModificationTime")] PostModel postModel)
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Create([Bind("Id, Title, Url, Content,CategoryId,Summary, Image,LastModificationTime")] PostModel postModel)
         {
             if (ModelState.IsValid)
             {
+                //Check Url exsitng
+                var isUrlExisting = await _context.Posts.AnyAsync(x => x.Url == postModel.Url);
+                if (isUrlExisting)
+                    throw new Exception("Url đã tồn tại");
+
                 var post = new Post
                 {
                     Title = postModel.Title,
+                    Url = postModel.Url,
                     Content = postModel.Content,
                     Image = postModel.Image,
                     CategoryId = postModel.CategoryId,
@@ -130,6 +143,7 @@ namespace BlogCore.Areas.Admins.Controllers
         }
 
         // GET: Admins/Post/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -143,6 +157,7 @@ namespace BlogCore.Areas.Admins.Controllers
                             select new PostModel
                             {
                                 Id = p.Id,
+                                Url = p.Url,
                                 Title = p.Title,
                                 Content = p.Content,
                                 CategoryId = p.CategoryId,
@@ -176,7 +191,8 @@ namespace BlogCore.Areas.Admins.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Content,CategoryId,Image,Summary, LastModificationTime")] PostModel postModel)
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Edit(int id, [Bind("Id, Title, Url, Content,CategoryId,Image,Summary, LastModificationTime")] PostModel postModel)
         {
             if (id != postModel.Id)
             {
@@ -190,7 +206,14 @@ namespace BlogCore.Areas.Admins.Controllers
                     var post = await _context.Posts.Where(x => x.Id == id)
                         .FirstOrDefaultAsync();
 
+                    //Check Url exsitng
+                    var isUrlExisting = await _context.Posts.AnyAsync(x => x.Url == postModel.Url 
+                    && postModel.Url != post.Url);
+                    if (isUrlExisting)
+                        throw new Exception("Url đã tồn tại");
+
                     post.Title = postModel.Title;
+                    post.Url = postModel.Url;
                     post.Content = postModel.Content;
                     post.Image = postModel.Image;
                     post.Summary = postModel.Summary;
@@ -219,6 +242,7 @@ namespace BlogCore.Areas.Admins.Controllers
         }
 
         // GET: Admins/Post/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -259,6 +283,7 @@ namespace BlogCore.Areas.Admins.Controllers
         // POST: Admins/Post/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var postModel = await _context.Posts.FindAsync(id);

@@ -37,7 +37,5 @@ namespace BlogCore.Data
         }
 
         public DbSet<BlogCore.Entities.User> User { get; set; }
-
-        public DbSet<BlogCore.Models.PostModel> PostModel { get; set; }
     }
 }

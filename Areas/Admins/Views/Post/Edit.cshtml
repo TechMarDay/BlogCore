@@ -20,6 +20,11 @@
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Url" class="control-label"></label>
+                <input asp-for="Url" class="form-control" />
+                <span asp-validation-for="Url" class="text-danger" maxlength="500"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Content" class="control-label"></label>
                 <textarea id="Content" name="Content" asp-for="Content" class="form-control"></textarea>
                 <span asp-validation-for="Content" class="text-danger"></span>
@@ -43,7 +48,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Summary" class="control-label"></label>
-                <input asp-for="Summary" class="form-control" />
+                <input asp-for="Summary" class="form-control" maxlength="500"/>
                 <span asp-validation-for="Summary" class="text-danger"></span>
             </div>
             <div class="form-group">

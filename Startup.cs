@@ -40,7 +40,14 @@ namespace BlogCore
                 options.AreaViewLocationFormats.Add("/Areas/{2}/Views/Shared/{0}.cshtml");
                 options.AreaViewLocationFormats.Add("/Views/Shared/{0}.cshtml");
             });
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option =>
+            {
+                option.LoginPath = "/admins/login";
+                option.AccessDeniedPath = "/admins/login";
+            }
+            );
+
+            //services.ConfigureApplicationCookie(option => option.LoginPath = "/admins/login");
             services.AddMvc();
             services.AddRouting();
             services.AddSession();
@@ -55,7 +62,7 @@ namespace BlogCore
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Error");
             }
             app.UseStaticFiles();
 

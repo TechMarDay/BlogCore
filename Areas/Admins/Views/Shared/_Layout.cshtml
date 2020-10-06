@@ -29,6 +29,19 @@
                 font-size: 3.5rem;
             }
         }
+
+        #to-top {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            cursor: pointer;
+            padding: 10px 15px;
+            background: #00bfff;
+            font-weight: bold;
+            color: #ffffff;
+            size: 20px;
+            display: none;
+        }
     </style>
     <!-- Custom styles for this template -->
     <link href="~/lib/bootstrap/dist/css/dashboard.css" rel="stylesheet" />
@@ -74,6 +87,8 @@
             </main>
         </div>
     </div>
+    <div id="to-top" title="back to top">↑</div>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
@@ -81,7 +96,28 @@
     <script src="~/js/dashboard.js"></script>
     <script src="~/lib/ckeditor/ckeditor.js"></script>
     <script src="~/lib/ckeditor/adapters/jquery.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+    <script>
+    hljs.initHighlightingOnLoad();
+        $(function () {
+            $(window).scroll(function () {
+                if ($(this).scrollTop() - 200 > 0) {
+                    $('#to-top').stop().slideDown('fast'); // show the button
+                } else {
+                    $('#to-top').stop().slideUp('fast'); // hide the button
+                }
+            });
+        });
+
+        $(function () {
+            // previous detection logic
+
+            $("#to-top").on("click", function () {
+                $("html, body").animate({
+                    scrollTop: 0
+                }, 200);
+            });
+        });
+    </script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

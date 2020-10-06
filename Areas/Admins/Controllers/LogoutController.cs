@@ -12,7 +12,7 @@ namespace BlogCore.Areas.Admins.Controllers
         public IActionResult Index()
         {
             var logout = HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return Redirect("/admins/login");
+            return Redirect("/login");
         }
     }
 }
