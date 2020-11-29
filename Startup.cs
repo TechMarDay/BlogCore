@@ -1,4 +1,5 @@
 using BlogCore.Data;
+using BlogCore.Middleware;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -14,9 +15,15 @@ namespace BlogCore
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+                        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                        .AddEnvironmentVariables();
+
+            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -63,9 +70,12 @@ namespace BlogCore
             else
             {
                 app.UseExceptionHandler("/Error");
+                app.UseHsts();
             }
+            app.UseErrorWrapping();
             app.UseStaticFiles();
 
+            app.UseHttpsRedirection();
             app.UseRouting();
             app.UseSession();
             app.UseCookiePolicy();

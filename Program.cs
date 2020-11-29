@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Serilog;
 using System;
+using System.IO;
 
 namespace BlogCore
 {
@@ -12,13 +14,18 @@ namespace BlogCore
     {
         public static void Main(string[] args)
         {
-            var host = CreateWebHostBuilder(args).Build();
+            Log.Logger = new LoggerConfiguration()
+              .Enrich.FromLogContext()
+              .WriteTo.Console()
+              .CreateLogger();
+            var host = CreateHostBuilder(args).Build();
 
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
                 try
                 {
+                    Log.Information("Starting up");
                     var context = services.GetRequiredService<BlogCoreContext>();
                     DbInitializer.Initialize(context);
                 }
@@ -32,8 +39,16 @@ namespace BlogCore
             host.Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .UseSerilog((hostingContext, loggerConfiguration) => loggerConfiguration
+                .ReadFrom.Configuration(hostingContext.Configuration))
+                    .ConfigureWebHostDefaults(webBuilder =>
+                    {
+                        webBuilder.UseIIS();
+                        webBuilder.UseContentRoot(Directory.GetCurrentDirectory());
+                        webBuilder.UseIISIntegration();
+                        webBuilder.UseStartup<Startup>();
+                    });
     }
 }

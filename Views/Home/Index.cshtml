@@ -7,7 +7,7 @@
     @foreach (var item in Model.Items)
     {
         <div class="col-md-6">
-            <div class="card mb-4 shadow-sm">
+            <div class="post card mb-4 shadow-sm" style="height:400px;">
                 @if (!string.IsNullOrEmpty(item.Image))
                 {
                     <div class="bd-placeholder-img card-img-top">
@@ -18,7 +18,7 @@
                     <strong class="d-inline-block mb-2 text-primary">@item.Category.Name</strong>
                     <h3 class="mb-0">@item.Title</h3>
                     <div class="mb-1 text-muted">Nov 12</div>
-                    <p class="card-text mb-auto">@item.Summary</p>
+                    <p class="card-text mb-auto">@item.Summary.Substring(0, 50)</p>
                     <a href="~/@item.Url" class="stretched-link">Continue reading</a>
                 </div>
             </div>
